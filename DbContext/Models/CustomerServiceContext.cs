@@ -6,27 +6,16 @@ namespace DbContext.Models
 {
     public partial class CustomerServiceContext : Microsoft.EntityFrameworkCore.DbContext
     {
-        public CustomerServiceContext()
-        {
-        }
-
         public CustomerServiceContext(DbContextOptions<CustomerServiceContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public virtual DbSet<Currency> Currency { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<Transaction> Transaction { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=localhost;Database=CustomerService;User ID=test;Password=test;");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

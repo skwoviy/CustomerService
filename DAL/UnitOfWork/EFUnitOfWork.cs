@@ -15,9 +15,9 @@ namespace DAL.UnitOfWork
         private StatusRepository _statusRepository;
         private TransactionRepository _transactionRepository;
 
-        public EFUnitOfWork()
+        public EFUnitOfWork(CustomerServiceContext dbContext)
         {
-            _dbContext = new CustomerServiceContext();
+            _dbContext = dbContext;
         }
 
         public IRepository<Currency> Currencies
