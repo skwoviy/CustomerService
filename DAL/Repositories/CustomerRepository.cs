@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -18,10 +19,12 @@ namespace DAL.Repositories
 
         public IEnumerable<Customer> Find(Expression<Func<Customer, bool>> predicate)
         {
-            IQueryable<Customer> result = _dbContext.Customer.Where(predicate);
+            IQueryable<Customer> result = _dbContext.Customer
+                .Include(x => x.Transaction).ThenInclude(y => y.Currency)
+                .Include(x => x.Transaction).ThenInclude(y => y.Status)
+                .Where(predicate);
 
-            return _dbContext.Customer.Where(predicate).ToList();
-
+            return result.ToList();
         }
 
         public Customer Get(long id)

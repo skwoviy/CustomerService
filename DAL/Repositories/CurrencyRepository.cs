@@ -20,7 +20,7 @@ namespace DAL.Repositories
         {
             IQueryable<Currency> result = _dbContext.Currency.Where(predicate);
 
-            return _dbContext.Currency.Where(predicate).ToList();
+            return result.ToList();
 
         }
 

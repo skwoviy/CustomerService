@@ -20,7 +20,7 @@ namespace DAL.Repositories
         {
             IQueryable<Status> result = _dbContext.Status.Where(predicate);
 
-            return _dbContext.Status.Where(predicate).ToList();
+            return result.ToList();
 
         }
 
